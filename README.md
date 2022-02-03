@@ -10,11 +10,11 @@ Do realizacji tego projektu wykorzystano metodę PV-LSTM przedstawioną w artyku
 - Wyniki testów sieci neuronowych zostały naniesione na ramki obrazów danej sceny.
 - Wygenerowano film z sekwencji obrazów wraz z wynikami sieci.
 
-## Architektura metody PV-LSTM
+## Architecture of PV-LSTM
 Architektura wykorzystanej metody PV-LSTM, przedstawionej w artykule ["Pedestrian Intention Prediction: A Multi-task Perspective"](https://arxiv.org/abs/2010.10270).
 ![Our proposed multitask Position-Speed-LSTM (PV-LSTM) architecture](Images/network.PNG)
 
-## Wyniki
+## Results
 --------------
 ![Example of outputs](Images/obraz1.png)
   
