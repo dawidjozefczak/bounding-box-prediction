@@ -55,7 +55,9 @@ for video in dataset:
             y = bbox[:,1].reshape(-1,1)
             w = np.abs(bbox[:,0] - bbox[:,2]).reshape(-1,1)
             h = np.abs(bbox[:,1] - bbox[:,3]).reshape(-1,1)
-            scenefolderpath = np.repeat(os.path.join(data_path, 'scene', video.replace('video_', '')), frames.shape[0]).reshape(-1,1)
+            # scenefolderpath = np.repeat(os.path.join(data_path, 'scene', video.replace('video_', '')), frames.shape[0]).reshape(-1,1)
+            scenefolderpath = np.repeat(os.path.join(data_path, 'images', video.replace('', '')), frames.shape[0]).reshape(-1,1)
+
 
             cross = np.array(vid['ped_annotations'][ped]['behavior']['cross']).reshape(-1,1)
 
@@ -70,7 +72,7 @@ for video in dataset:
                                   'scenefolderpath': data[:,6].reshape(-1), 
                                   'crossing_true': data[:,7].reshape(-1)})
     data_to_write['filename'] = data_to_write.frame
-    data_to_write.filename = data_to_write.filename.apply(lambda x: '%04d'%int(x)+'.png')
+    data_to_write.filename = data_to_write.filename.apply(lambda x: '%05d'%int(x)+'.png')
     
     if video in train_videos:
         data_to_write.to_csv(os.path.join(data_path, 'processed_annotations', 'train', video+'.csv'), index=False)

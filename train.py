@@ -1,3 +1,6 @@
+from cProfile import label
+import numbers
+from operator import le
 import time
 import torch
 import torch.nn as nn
@@ -7,6 +10,7 @@ import torch.optim as optim
 import torchvision
 import torchvision.transforms as transforms
 
+import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.metrics import recall_score, accuracy_score, average_precision_score, precision_score
 
@@ -16,20 +20,24 @@ import utils
 
 class args():
     def __init__(self):
-        self.jaad_dataset = '/data/smailait-data/JAAD/processed_annotations' #folder containing parsed jaad annotations (used when first time loading data)
+        # self.jaad_dataset = '/data/smailait-data/JAAD/processed_annotations' #folder containing parsed jaad annotations (used when first time loading data)
+        self.jaad_dataset = '../JAAD/processed_annotations'
         self.dtype        = 'train'
         self.from_file    = False #read dataset from csv file or reprocess data
         self.save         = True
         self.file         = '/data/smailait-data/jaad_train_16_16.csv'
-        self.save_path    = '/data/smailait-data/jaad_train_16_16.csv'
-        self.model_path    = '/data/smailait-data/models/multitask_pv_lstm_trained.pkl'
+        # self.save_path    = '/data/smailait-data/jaad_train_16_16.csv'
+        self.save_path    = 'data/jaad_train_16_16.csv'
+        # self.model_path    = '/data/smailait-data/models/multitask_pv_lstm_trained.pkl'
+        self.model_path    = 'data/multitask_pv_lstm_trained.pkl'
         self.loader_workers = 10
         self.loader_shuffle = True
         self.pin_memory     = False
         self.image_resize   = [240, 426]
         self.device         = 'cuda'
         self.batch_size     = 100
-        self.n_epochs       = 100
+        # self.n_epochs       = 100
+        self.n_epochs       = 20
         self.hidden_size    = 512
         self.hardtanh_limit = 100
         self.input  = 16
@@ -60,6 +68,16 @@ val_s_scores   = []
 val_c_scores   = []
 
 
+# --------------------
+val_intent_mAP = []
+val_intent_acc = []
+val_avg_acc = []
+val_avg_rec = []
+val_avg_pre = []
+val_avg_mAP = []
+# -------------------
+
+
 print('='*100)
 print('Training ...')
 for epoch in range(args.n_epochs):
@@ -79,7 +97,7 @@ for epoch in range(args.n_epochs):
     avg_pre = 0
     mAP = 0
     
-    counter = 0
+    counter = 0    
     for idx, (obs_s, target_s, obs_p, target_p, target_c, label_c) in enumerate(train):
         counter += 1
         obs_s    = obs_s.to(device='cuda')
@@ -172,6 +190,13 @@ for epoch in range(args.n_epochs):
     intent_acc = accuracy_score(intent_targets, intent_preds)
     intent_mAP = average_precision_score(intent_targets, intent_preds, average=None)
     
+    val_intent_mAP.append(intent_mAP)
+    val_intent_acc.append(intent_acc)
+    val_avg_acc.append(avg_acc)
+    val_avg_rec.append(avg_rec)
+    val_avg_pre.append(avg_pre)
+    val_avg_mAP.append(mAP)
+
     scheduler.step(crossing_loss)
     
     print('e:', epoch, '| ts: %.4f'% avg_epoch_train_s_loss, '| tc: %.4f'% avg_epoch_train_c_loss, 
@@ -184,3 +209,43 @@ print('='*100)
 print('Saving ...')
 torch.save(net.state_dict(), args.model_path)
 print('Done !')
+
+plt.figure(figsize=(10,8))
+plt.plot(list(range(len(train_s_scores))), train_s_scores, label = 'BB Training loss')
+plt.plot(list(range(len(val_s_scores))), val_s_scores, label = 'BB Validation loss')
+plt.plot(list(range(len(train_c_scores))), train_c_scores, label = 'Intention Training loss')
+plt.plot(list(range(len(val_c_scores))), val_c_scores, label = 'Inteention Validation loss')
+plt.xlabel('epoch')
+plt.ylabel('Mean square error loss')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+plt.figure(figsize=(10,8))
+plt.plot(list(range(len(val_intent_mAP))), val_intent_mAP, label = 'intent average precision score')
+plt.plot(list(range(len(val_avg_mAP))), val_avg_mAP, label = 'average precision score')
+plt.xlabel('epoch')
+plt.ylabel('Average precision')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+plt.figure(figsize=(10,8))
+plt.plot(list(range(len(val_intent_acc))), val_intent_acc, label = 'intent accuracy score')
+plt.plot(list(range(len(val_avg_acc))), val_avg_acc, label = 'accuracy score')
+plt.xlabel('epoch')
+plt.ylabel('Accuracy')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+plt.figure(figsize=(10,8))
+plt.plot(list(range(len(val_avg_pre))), val_avg_pre, label = 'precision score')
+plt.plot(list(range(len(val_avg_rec))), val_avg_rec, label = 'recall score')
+plt.xlabel('epoch')
+plt.ylabel('Precision and Recall')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+print('='*100)

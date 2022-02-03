@@ -17,13 +17,13 @@ import utils
 
 class args():
     def __init__(self):
-        self.jaad_dataset = '/data/smailait-data/JAAD/processed_annotations' #folder containing parsed jaad annotations (used when first time loading data)
+        self.jaad_dataset = '../JAAD/processed_annotations' #folder containing parsed jaad annotations (used when first time loading data)
         self.dtype        = 'test'
         self.from_file    = False #read dataset from csv file or reprocess data
         self.save         = True
-        self.file         = '/data/smailait-data/jaad_test_16_16.csv'
-        self.save_path    = '/data/smailait-data/jaad_test_16_16.csv'
-        self.model_path    = '/data/smailait-data/models/multitask_pv_lstm_trained.pkl'
+        self.file         = 'data/jaad_test_16_16.csv'
+        self.save_path    = 'data/jaad_test_16_16.csv'
+        self.model_path    = 'data/multitask_pv_lstm_trained.pkl'
         self.loader_workers = 10
         self.loader_shuffle = True
         self.pin_memory     = False
@@ -38,7 +38,8 @@ class args():
         self.stride = 16
         self.skip   = 1
         self.task   = 'bounding_box-intention'
-        self.use_scenes = False       
+        # self.use_scenes = False
+        self.use_scenes = False
         self.lr = 0.00001
         
 args = args()
