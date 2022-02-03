@@ -88,12 +88,11 @@ python read.py
 Generate movie from the video_0332 image:
 ```
 python to_movie.py
-
+```
 
 ## Tested Environments:
 ------------
   * Ubuntu 20.04, CUDA 11.2
-
 
 
 ### Citation
