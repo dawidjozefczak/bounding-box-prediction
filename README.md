@@ -12,7 +12,7 @@ Do realizacji tego projektu wykorzystano metodę PV-LSTM przedstawioną w artyku
 
 ## Architektura metody PV-LSTM
 Architektura wykorzystanej metody PV-LSTM, przedstawionej w artykule ["Pedestrian Intention Prediction: A Multi-task Perspective"](https://arxiv.org/abs/2010.10270).
-(Images/network.PNG)
+!(Images/network.PNG)
 
 ## Results
 --------------
