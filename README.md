@@ -16,7 +16,7 @@ Architektura wykorzystanej metody PV-LSTM, przedstawionej w artykule ["Pedestria
 
 ## Wyniki
 --------------
-![Example of outputs](Images/Obraz1.png)
+![Example of outputs](Images/obraz1.png)
   
 ## Installation:
 ------------
