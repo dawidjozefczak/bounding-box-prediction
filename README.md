@@ -1,40 +1,18 @@
-# Pedestrian Intention Prediction: A Multi-task Perspective
+# Automatyczne rozpoznawanie pieszego wchodzącego na jezdnię
+<!-- # Pedestrian Intention Prediction: A Multi-task Perspective -->
 
 ## _Absract_:
-In order to be globally deployed, autonomous cars must guarantee the safety of pedestrians. This is the reason why forecasting pedestrians' intentions sufficiently in advance is one of the most critical and challenging tasks for autonomous vehicles.
-This work tries to solve this problem by jointly predicting the intention and visual states of pedestrians.
-In terms of visual states, whereas previous work focused on x-y coordinates, we will also predict the size and indeed the whole bounding box of the pedestrian.
-The method is a recurrent neural network in a multi-task learning approach. It has one head that predicts the intention of the pedestrian for each one of its future position and another one predicting the visual states of the pedestrian.
-Experiments on the JAAD dataset show the superiority of the performance of our method compared to previous works for intention prediction.
-Also, although its simple architecture (more than 2 times faster), the performance of the bounding box prediction is comparable to the ones yielded by much more complex architectures.
+Przewidywanie działań pieszych było w ostatnich latach przedmiotem aktywnych badań, w wyniku którychpowstało wiele nowych rozwiązań algorytmicznych. W kontekście systemów wspomagania i autonomicznejjazdy zdolność przewidywania działań pieszych w szczególności podczas przechodzenia przez jezdnię jest uważana za ważną dla rozwoju autonomicznych pojazdów. W ciągu ostatniej dekady temat przewidywaniadziałań pieszych wzbudził duże zainteresowanie w społecznościach zajmujących się systemami wizyjnymii robotyką.  Zaproponowano wiele podejść, które dają obiecujące wyniki odnośnie przewidywania działań pieszych w pokonywaniu przejść dla pieszych.
 
 ## Introduction:
-This is the official code for the paper ["Pedestrian Intention Prediction: A Multi-task Perspective"](https://arxiv.org/abs/2010.10270), accepted and published in [hEART 2021](http://www.heart-web.org/) (the 9th Symposium of the European Association for Research in Transportation).
+Do realizacji tego projektu wykorzystano metodę PV-LSTM przedstawioną w artykule ["Pedestrian Intention Prediction: A Multi-task Perspective"](https://arxiv.org/abs/2010.10270). Kod wykorzystany w tym projekcie pochodzi z (https://github.com/vita-epfl/bounding-box-prediction.git). Modyfikacji poddano:
+  Zwizualizowano wyniki treningu sieci neuronowej.
+  Wyniki testów sieci neuronowych zostały naniesione na ramki obrazów danej sceny.
+  Wygenerowano film z sekwencji obrazów wraz z wynikami sieci.
 
-## Contents
-------------
-  * [Repository Structure](#repository-structure)
-  * [Proposed Method](#proposed-method)
-  * [Results](#results)
-  * [Installation](#installation)
-  * [Dataset](#dataset)
-  * [Training/Testing](#training-testing)
-  * [Tested Environments](#tested-environments)
-  
-## Repository structure:
-------------
-    ├── bounding-box-prediction         : Project repository
-            ├── prepare_data.py         : Script for processing raw JAAD data.
-            ├── train.py                : Script for training PV-LSTM.  
-            ├── test.py                 : Script for testing PV-LSTM.  
-            ├── DataLoader.py           : Script for data pre-processing and loader. 
-            ├── networks.py             : Script containing the implementation of the network.
-            ├── utils.py                : Script containing necessary math and transformation functions.
-            
-## Proposed method
--------------
-![Our proposed multitask Position-Speed-LSTM (PV-LSTM) architecture](Images/network.PNG)
-
+## Architektura metody PV-LSTM
+Architektura wykorzystanej metody PV-LSTM, przedstawionej w artykule ["Pedestrian Intention Prediction: A Multi-task Perspective"](https://arxiv.org/abs/2010.10270).
+(Images/network.PNG)
 
 ## Results
 --------------
