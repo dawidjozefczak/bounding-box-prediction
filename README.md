@@ -6,9 +6,9 @@ Przewidywanie działań pieszych było w ostatnich latach przedmiotem aktywnych 
 
 ## Introduction:
 Do realizacji tego projektu wykorzystano metodę PV-LSTM przedstawioną w artykule ["Pedestrian Intention Prediction: A Multi-task Perspective"](https://arxiv.org/abs/2010.10270). Kod wykorzystany w tym projekcie pochodzi z (https://github.com/vita-epfl/bounding-box-prediction.git). Modyfikacji poddano:
-  Zwizualizowano wyniki treningu sieci neuronowej.
-  Wyniki testów sieci neuronowych zostały naniesione na ramki obrazów danej sceny.
-  Wygenerowano film z sekwencji obrazów wraz z wynikami sieci.
+- Zwizualizowano wyniki treningu sieci neuronowej.
+- Wyniki testów sieci neuronowych zostały naniesione na ramki obrazów danej sceny.
+- Wygenerowano film z sekwencji obrazów wraz z wynikami sieci.
 
 ## Architektura metody PV-LSTM
 Architektura wykorzystanej metody PV-LSTM, przedstawionej w artykule ["Pedestrian Intention Prediction: A Multi-task Perspective"](https://arxiv.org/abs/2010.10270).
