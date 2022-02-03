@@ -81,11 +81,16 @@ Test the trained network by running the command:
 ```
 python3 test.py
 ```
+Start generating bounding box from the file video_0332.csv:
+```
+python read.py
+Generate movie from the video_0332 image:
+```
+python to_movie.py
 
 ## Tested Environments:
 ------------
-  * Ubuntu 18.04, CUDA 10.1
-  * Windows 10, CUDA 10.1
+  * Ubuntu 20.04, CUDA 11.2
 
 
 
