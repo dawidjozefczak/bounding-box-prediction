@@ -53,11 +53,11 @@ pip install -r requirements.txt
 Open `train.py` and `test.py` and change the parameters in the args class depending on the paths of your files.
 Start training the network by running the command:
 ```
-python3 train.py
+python train.py
 ```
 Test the trained network by running the command:
 ```
-python3 test.py
+python test.py
 ```
 Start generating bounding box from the file video_0332.csv:
 ```
